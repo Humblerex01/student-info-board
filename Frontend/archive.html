@@ -257,7 +257,7 @@ tabs.forEach(tab => {
   // ✅ Load archived posts from backend
   async function loadArchive() {
     try {
-      const res = await fetch("http://localhost:4000/api/posts?status=archived");
+      const res = await fetch("https://studentinfoboard.onrender.com/api/posts?status=archived");
       if (!res.ok) throw new Error("Failed to fetch archive");
       const { items } = await res.json();
 
