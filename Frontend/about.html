@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Department | Dept Info Board</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E1B4B',
+            accent: '#38BDF8',
+            background: '#F8FAFC',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-gray-800 font-sans">
+
+  <!-- ✅ Navbar (reuse same from index.html with h-20) -->
+  <nav class="bg-primary text-white shadow-md fixed w-full z-40 h-20">
+    <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between relative">
+      <div class="absolute left-4 flex items-center">
+        <img src="Images/futo.jpeg" alt="Dept Logo" class="h-10 w-10 object-contain" />
+      </div>
+      <h1 class="absolute left-1/2 transform -translate-x-1/2 text-lg md:text-xl font-bold text-center">
+        Dept Info Board
+      </h1>
+      <div class="absolute right-4">
+        <button id="menu-btn" class="md:hidden text-accent focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Sidebar -->
+  <aside id="mobile-menu"
+    class="fixed top-0 right-0 h-full w-64 bg-primary text-white transform translate-x-full transition-transform duration-300 md:hidden z-40 shadow-lg">
+    <div class="flex justify-between items-center px-4 py-3 border-b border-accent/30">
+      <h2 class="text-lg font-semibold">Menu</h2>
+      <button id="close-btn" class="text-accent">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-col py-6 space-y-4 pl-6 text-lg">
+      <a href="index.html" class="hover:text-accent">Home</a>
+      <a href="about.html" class="hover:text-accent">About</a>
+      <a href="announcements.html" class="hover:text-accent">Announcements</a>
+      <a href="timetables.html" class="hover:text-accent">Timetables</a>
+      <a href="events.html" class="hover:text-accent">Events</a>
+      <a href="archive.html" class="hover:text-accent">Archive</a>
+      <a href="login.html" class="bg-accent text-primary px-3 py-1 rounded-md w-fit">Admin</a>
+    </nav>
+  </aside>
+
+  <!-- Desktop Sidebar -->
+  <aside class="hidden md:flex fixed top-0 right-0 h-full w-60 bg-primary text-white flex-col py-24 space-y-6 pl-6 text-lg shadow-lg">
+    <a href="index.html" class="hover:text-accent">Home</a>
+    <a href="about.html" class="hover:text-accent">About</a>
+    <a href="announcements.html" class="hover:text-accent">Announcements</a>
+    <a href="timetables.html" class="hover:text-accent">Timetables</a>
+    <a href="events.html" class="hover:text-accent">Events</a>
+    <a href="archive.html" class="hover:text-accent">Archive</a>
+    <a href="login.html" class="bg-accent text-primary px-3 py-1 rounded-md w-fit">Admin</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="text-justify pt-24 md:mr-60">
+    <section class="max-w-5xl mx-auto px-4 py-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6 text-center">About the Department</h2>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        The <b>Department of Cyber Security</b>, <b>FUTO</b>, is committed to providing world-class education and training in the
+        field of cyber security and information technology. Our programs are designed to equip students with
+        cutting-edge skills in digital forensics, secure software development, ethical hacking, and network defense.
+      </p>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        With a dedicated team of faculty members and industry partnerships, we ensure our students are prepared
+        for both academic excellence and real-world problem-solving in the fast-evolving tech landscape.
+      </p>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-8">
+      <div class="bg-primary/90 shadow-md p-6 rounded-xl">
+        <h3 class="text-3xl font-semibold text-accent mb-4">Our Mission</h3>
+        <p class="text-white">
+          To train highly skilled graduates in the field of cyber security who can innovate and lead in academia,
+          industry, and government institutions while addressing Nigeria’s and the world’s pressing digital
+          challenges.
+        </p>
+      </div>
+      <div class="bg-primary/90 shadow-md p-6 rounded-xl">
+        <h3 class="text-3xl font-semibold text-accent mb-4">Our Vision</h3>
+        <p class="text-white">
+          To be recognized as a leading center of excellence in cyber security education and research, fostering
+          innovation, integrity, and global impact.
+        </p>
+      </div>
+    </section>
+  </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" 
+    class="hidden fixed bottom-6 right-6 bg-accent text-primary p-3 rounded-full shadow-lg hover:bg-accent/80 transition z-50"
+    aria-label="Back to top">
+    <!-- Up Arrow Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+    </svg>
+    </button>
+
+<!-- Footer -->
+<footer class="bg-primary text-white md:mr-60 text-justify">
+  <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-2 gap-8">
+    
+    <!-- Engagement Message -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3 text-accent">Stay Connected</h3>
+      <p class="text-gray-200 text-sm leading-relaxed">
+        At the Department of Cyber Security, FUTO, we are committed to keeping students 
+        informed with the latest announcements, academic schedules, and events. 
+        Together, we build a vibrant and informed community.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3 text-accent">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="index.html" class="hover:text-accent">Home</a></li>
+        <li><a href="timetables.html" class="hover:text-accent">Timetables</a></li>
+        <li><a href="events.html" class="hover:text-accent">Events</a></li>
+        <li><a href="announcements.html" class="hover:text-accent">Announcements</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bg-primary text-center py-4 border-t border-accent/30">
+    <p class="text-sm md:text-base text-gray-200">
+      &copy; 2025 Department of Cyber Security, FUTO. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+  <!-- Mobile Menu JS -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('close-btn');
+    const backToTopBtn = document.getElementById('backToTop');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('translate-x-full');
+      mobileMenu.classList.add('translate-x-0');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('translate-x-0');
+      mobileMenu.classList.add('translate-x-full');
+    });
+
+  // Show button when scrolling down 200px
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+      backToTopBtn.classList.remove('hidden');
+    } else {
+      backToTopBtn.classList.add('hidden');
+    }
+  });
+
+  // Smooth scroll to top
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  </script>
+
+</body>
+</html>

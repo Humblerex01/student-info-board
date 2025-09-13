@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timetables | Dept Info Board</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E1B4B',
+            accent: '#38BDF8',
+            background: '#F8FAFC',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-gray-800 font-sans">
+
+  <!-- ✅ Navbar -->
+  <nav class="bg-primary text-white shadow-md fixed w-full z-40 h-20">
+    <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between relative">
+      <div class="absolute left-4 flex items-center">
+        <img src="Images/futo.jpeg" alt="Dept Logo" class="h-10 w-10 object-contain" />
+      </div>
+      <h1 class="absolute left-1/2 transform -translate-x-1/2 text-lg md:text-xl font-bold text-center">
+        Dept Info Board
+      </h1>
+      <div class="absolute right-4">
+        <button id="menu-btn" class="md:hidden text-accent focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Sidebar -->
+  <aside id="mobile-menu"
+    class="fixed top-0 right-0 h-full w-64 bg-primary text-white transform translate-x-full transition-transform duration-300 md:hidden z-40 shadow-lg">
+    <div class="flex justify-between items-center px-4 py-3 border-b border-accent/30">
+      <h2 class="text-lg font-semibold">Menu</h2>
+      <button id="close-btn" class="text-accent">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-col py-6 space-y-4 pl-6 text-lg">
+      <a href="index.html" class="hover:text-accent">Home</a>
+      <a href="about.html" class="hover:text-accent">About</a>
+      <a href="announcements.html" class="hover:text-accent">Announcements</a>
+      <a href="timetables.html" class="hover:text-accent">Timetables</a>
+      <a href="events.html" class="hover:text-accent">Events</a>
+      <a href="archive.html" class="hover:text-accent">Archive</a>
+      <a href="login.html" class="bg-accent text-primary px-3 py-1 rounded-md w-fit">Admin</a>
+    </nav>
+  </aside>
+
+  <!-- Desktop Sidebar -->
+  <aside class="hidden md:flex fixed top-0 right-0 h-full w-60 bg-primary text-white flex-col py-24 space-y-6 pl-6 text-lg shadow-lg">
+    <a href="index.html" class="hover:text-accent">Home</a>
+    <a href="about.html" class="hover:text-accent">About</a>
+    <a href="announcements.html" class="hover:text-accent">Announcements</a>
+    <a href="timetables.html" class="hover:text-accent">Timetables</a>
+    <a href="events.html" class="hover:text-accent">Events</a>
+    <a href="archive.html" class="hover:text-accent">Archive</a>
+    <a href="login.html" class="bg-accent text-primary px-3 py-1 rounded-md w-fit">Admin</a>
+  </aside>
+
+  <!-- Main -->
+  <main class="pt-24 md:mr-60 px-4">
+    <section class="max-w-6xl mx-auto py-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6 text-center">Lecture & Exam Timetables</h2>
+
+      <!-- Search & Filters -->
+      <div class="bg-white p-4 rounded-lg shadow mb-8 flex flex-col md:flex-row gap-4">
+        <input id="searchInput" type="text" placeholder="Search timetables..."
+          class="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-accent">
+        <select id="filterLevel" class="px-4 py-2 border rounded-lg">
+          <option value="all">All Levels</option>
+          <option value="100L">100 Level</option>
+          <option value="200L">200 Level</option>
+          <option value="300L">300 Level</option>
+          <option value="400L">400 Level</option>
+          <option value="500L">500 Level</option>
+        </select>
+      </div>
+
+      <!-- Timetable Container -->
+      <div id="timetables-list" class="grid gap-6">
+        <!-- Timetable will be injected here dynamically --> 
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white md:mr-60 text-justify">
+    <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-2 gap-8">
+      <!-- Engagement Message -->
+      <div>
+        <h3 class="text-xl font-semibold mb-3 text-accent">Stay Connected</h3>
+        <p class="text-gray-200 text-sm leading-relaxed">
+          At the Department of Cyber Security, FUTO, we are committed to keeping students 
+          informed with the latest announcements, academic schedules, and events. 
+          Together, we build a vibrant and informed community.
+        </p>
+      </div>
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-xl font-semibold mb-3 text-accent">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="index.html" class="hover:text-accent">Home</a></li>
+          <li><a href="timetables.html" class="hover:text-accent">Timetables</a></li>
+          <li><a href="events.html" class="hover:text-accent">Events</a></li>
+          <li><a href="announcements.html" class="hover:text-accent">Announcements</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bg-primary text-center py-4 border-t border-accent/30">
+      <p class="text-sm md:text-base text-gray-200">
+        &copy; 2025 Department of Cyber Security, FUTO. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" 
+    class="hidden fixed bottom-6 right-6 bg-accent text-primary p-3 rounded-full shadow-lg hover:bg-accent/80 transition z-50"
+    aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+    </svg>
+  </button>
+
+<!-- Scripts -->
+<script>
+  const API_URL = "http://localhost:4000"; // backend base URL
+
+  const searchInput = document.getElementById("searchInput");
+  const filterLevel = document.getElementById("filterLevel");
+  const container = document.getElementById("timetables-list");
+
+  // 🔄 Show a loading spinner
+  function showSpinner(show = true) {
+    container.innerHTML = show
+      ? `<div class="flex flex-col items-center py-8">
+           <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+           <p class="mt-2 text-gray-500">Loading timetables...</p>
+         </div>`
+      : "";
+  }
+
+  // 📥 Trigger file download from backend
+  async function downloadFile(fileUrl, filename = "timetable.pdf") {
+    try {
+      const res = await fetch(`${API_URL}${fileUrl}`);
+      if (!res.ok) throw new Error("Failed to fetch file");
+      const blob = await res.blob();
+
+      // Create a temporary link to trigger download
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      // Free memory
+      URL.revokeObjectURL(a.href);
+    } catch (err) {
+      console.error("Download error:", err);
+      alert("Unable to download timetable. Please try again.");
+    }
+  }
+
+  // ✅ Fetch timetables from backend
+  async function loadTimetables() {
+    showSpinner(true);
+
+    try {
+      const res = await fetch(`${API_URL}/api/posts?type=timetable&status=active`);
+      if (!res.ok) throw new Error("Failed to fetch timetables");
+      const data = await res.json();
+
+      container.innerHTML = ""; // clear loader
+
+      if (!data.items || data.items.length === 0) {
+        container.innerHTML = `<p class="text-center text-gray-500">No timetables uploaded yet.</p>`;
+        return;
+      }
+
+      data.items.forEach(tt => {
+        const card = document.createElement("div");
+        card.className = "bg-white p-6 rounded-xl shadow hover:shadow-lg transition";
+        card.dataset.level = tt.level || "all";
+
+        // Build inner content
+        card.innerHTML = `
+          <h3 class="text-xl font-semibold text-primary mb-2">📘 ${tt.title || "Timetable"}</h3>
+          <p class="text-gray-600 mb-2">${tt.content || ""}</p>
+          ${
+            tt.fileUrl
+              ? `<button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                    onclick="downloadFile('${tt.fileUrl}', '${tt.title || "timetable"}.pdf')">
+                    ⬇ Download Timetable
+                 </button>`
+              : ""
+          }
+          <span class="block text-sm text-gray-500 mt-2">
+            Uploaded ${tt.createdAt ? new Date(tt.createdAt).toLocaleDateString() : ""}
+          </span>
+        `;
+
+        container.appendChild(card);
+      });
+    } catch (err) {
+      console.error("Error loading timetables:", err);
+      container.innerHTML = `<p class="text-center text-red-500">Error loading timetables.</p>`;
+    }
+  }
+
+  // 🔎 Filtering
+  function filterTimetables() {
+    const search = searchInput.value.toLowerCase();
+    const level = filterLevel.value;
+
+    Array.from(container.children).forEach(item => {
+      const matchesSearch = item.textContent.toLowerCase().includes(search);
+      const matchesLevel = level === "all" || item.dataset.level === level;
+      item.style.display = matchesSearch && matchesLevel ? "" : "none";
+    });
+  }
+
+  searchInput.addEventListener("input", filterTimetables);
+  filterLevel.addEventListener("change", filterTimetables);
+
+  // 📱 Mobile Menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('close-btn');
+
+  if (menuBtn && mobileMenu && closeBtn) {
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('translate-x-full');
+      mobileMenu.classList.add('translate-x-0');
+    });
+    closeBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('translate-x-0');
+      mobileMenu.classList.add('translate-x-full');
+    });
+  }
+
+  // ⬆️ Back to Top
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 200) {
+      backToTopBtn.classList.remove('hidden');
+    } else {
+      backToTopBtn.classList.add('hidden');
+    }
+  });
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // 🚀 Load timetables on page load
+  document.addEventListener("DOMContentLoaded", loadTimetables);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Department Student Information Board</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind custom colors -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E1B4B',   // deep indigo (navbar/sidebar)
+            accent:  '#38BDF8',   // cyan sky (buttons/links)
+            background: '#F8FAFC' // light background
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* small helper so the centered title stays centered regardless of left/right items */
+    .nav-center-wrapper { position: relative; }
+    .nav-center-title { position: absolute; left: 50%; transform: translateX(-50%); }
+  </style>
+</head>
+<body class="bg-background text-gray-800 font-sans">
+
+<!-- Navbar -->
+<nav class="bg-primary text-white shadow-md fixed w-full z-40 h-20">
+  <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between relative">
+
+    <!-- Left: Logo -->
+    <div class="absolute left-4 flex items-center">
+      <img src="Images/futo.jpeg" alt="Dept Logo" class="h-10 w-10 object-contain" />
+    </div>
+
+    <!-- Center: Title -->
+    <h1 class="absolute left-1/2 transform -translate-x-1/2 text-lg md:text-xl font-bold text-center">
+      Dept Info Board
+    </h1>
+
+    <!-- Right: Hamburger (mobile only) -->
+    <div class="absolute right-4">
+      <button id="menu-btn" aria-label="Open menu" aria-expanded="false" class="md:hidden text-accent focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+  <!-- OVERLAY (dim background when mobile menu open) -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-40 hidden z-30 md:hidden"></div>
+
+  <!-- MOBILE SIDEBAR (slides in from right) -->
+  <aside id="mobile-menu"
+         class="fixed top-0 right-0 h-full w-64 bg-primary text-white transform translate-x-full transition-transform duration-300 md:hidden z-40 shadow-lg"
+         aria-hidden="true">
+    <!-- header with close -->
+    <div class="flex items-center justify-between px-4 py-3 border-b border-accent/30">
+      <h2 class="text-lg font-semibold">Menu</h2>
+      <button id="close-btn" aria-label="Close menu" class="text-accent focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- links -->
+    <nav class="flex flex-col py-6 space-y-4 pl-6 text-lg">
+      <a href="index.html" class="hover:text-accent" data-close>Home</a>
+      <a href="about.html" class="hover:text-accent" data-close>About</a>
+      <a href="announcements.html" class="hover:text-accent" data-close>Announcements</a>
+      <a href="timetables.html" class="hover:text-accent" data-close>Timetables</a>
+      <a href="events.html" class="hover:text-accent" data-close>Events</a>
+      <a href="archive.html" class="hover:text-accent" data-close>Archive</a>
+      <a href="login.html" class="bg-accent text-primary px-3 py-1 rounded-md w-fit">Admin</a>
+    </nav>
+  </aside>
+
+  <!-- DESKTOP SIDEBAR (right vertical nav) -->
+  <aside class="hidden md:flex fixed top-20 right-0 h-full w-60 bg-primary text-white flex-col py-8 space-y-6 pl-6 text-lg shadow-lg z-20">
+    <a href="index.html" class="hover:text-accent">Home</a>
+    <a href="about.html" class="hover:text-accent">About</a>
+    <a href="announcements.html" class="hover:text-accent">Announcements</a>
+    <a href="timetables.html" class="hover:text-accent">Timetables</a>
+    <a href="events.html" class="hover:text-accent">Events</a>
+    <a href="archive.html" class="hover:text-accent">Archive</a>
+    <a href="login.html" class="bg-accent text-primary px-3 py-1 rounded-md w-fit">Admin</a>
+  </aside>
+
+  <!-- MAIN CONTENT (leave space for desktop sidebar using md:mr-60) -->
+  <main class="pt-24 md:mr-60 px-4">
+    <!-- Hero -->
+    <section class="bg-accent/10 py-20">
+      <div class="max-w-5xl mx-auto text-center px-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4">
+          Department Of Cyber Security
+        </h2>
+        <br>
+        <p class="text-lg text-gray-700 mb-6">
+          Stay updated with the latest announcements, events, timetables, and important news from the department.
+        </p>
+        <a href="announcements.html" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-opacity-80 transition">
+          View Announcements
+        </a>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section class="max-w-6xl mx-auto py-12 px-4 grid md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold mb-2 text-primary">Latest Announcements</h3>
+        <p class="text-gray-600 mb-4">Check the most recent departmental updates and important notices.</p>
+        <a href="announcements.html" class="text-accent font-semibold hover:underline">See More →</a>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold mb-2 text-primary">Upcoming Events</h3>
+        <p class="text-gray-600 mb-4">Never miss a seminar, workshop, or departmental activity.</p>
+        <a href="events.html" class="text-accent font-semibold hover:underline">See More →</a>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold mb-2 text-primary">Timetables</h3>
+        <p class="text-gray-600 mb-4">View lecture and exam schedules for all levels in the department.</p>
+        <a href="timetables.html" class="text-accent font-semibold hover:underline">See More →</a>
+      </div>
+    </section>
+
+  </main>
+
+<!-- Footer -->
+<footer class="bg-primary text-white md:mr-60 text-justify">
+  <div class="max-w-6xl mx-auto px-6 py-10 grid md:grid-cols-2 gap-8">
+    
+    <!-- Engagement Message -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3 text-accent">Stay Connected</h3>
+      <p class="text-gray-200 text-sm leading-relaxed">
+        At the Department of Cyber Security, FUTO, we are committed to keeping students 
+        informed with the latest announcements, academic schedules, and events. 
+        Together, we build a vibrant and informed community.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3 text-accent">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="index.html" class="hover:text-accent">Home</a></li>
+        <li><a href="timetables.html" class="hover:text-accent">Timetables</a></li>
+        <li><a href="events.html" class="hover:text-accent">Events</a></li>
+        <li><a href="announcements.html" class="hover:text-accent">Announcements</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bg-primary text-center py-4 border-t border-accent/30">
+    <p class="text-sm md:text-base text-gray-200">
+      &copy; 2025 Department of Cyber Security, FUTO. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" 
+    class="hidden fixed bottom-6 right-6 bg-accent text-primary p-3 rounded-full shadow-lg hover:bg-accent/80 transition z-50"
+    aria-label="Back to top">
+    <!-- Up Arrow Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+    </svg>
+    </button>
+
+  <!-- SCRIPT: menu open/close + overlay + esc + close on link click -->
+  <script>
+    (function () {
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeBtn = document.getElementById('close-btn');
+      const overlay = document.getElementById('overlay');
+      const backToTopBtn = document.getElementById('backToTop');
+    
+      // defensive checks
+      if (!menuBtn || !mobileMenu || !closeBtn || !overlay) return;
+
+      const openMenu = () => {
+        mobileMenu.classList.remove('translate-x-full');
+        mobileMenu.classList.add('translate-x-0');
+        overlay.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden'); // prevent background scroll
+        menuBtn.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+      };
+
+      const closeMenu = () => {
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      };
+
+      menuBtn.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      overlay.addEventListener('click', closeMenu);
+
+      // close when a mobile link with data-close attribute is clicked
+      mobileMenu.querySelectorAll('[data-close]').forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeMenu();
+        }
+      });
+
+      // Show button when scrolling down 200px
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+        backToTopBtn.classList.remove('hidden');
+        } else {
+        backToTopBtn.classList.add('hidden');
+        }
+    });
+
+    // Smooth scroll to top
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    })();
+  </script>
+</body>
+</html>

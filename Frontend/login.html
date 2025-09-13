@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login | Dept Info Board</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1E1B4B',
+            accent: '#38BDF8',
+            background: '#F8FAFC',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-gray-800 font-sans">
+
+<!-- ✅ Navbar (centered title + back button) -->
+<nav class="bg-primary text-white shadow-md fixed w-full z-40 h-20 flex items-center justify-center relative px-6">
+  <!-- Centered Title -->
+  <h1 class="text-xl font-bold text-center absolute left-1/2 transform -translate-x-1/2">
+    Dept Info Board – Admin Login
+  </h1>
+
+  <!-- Back to Home Button -->
+  <a href="index.html"
+     class="absolute right-6 bg-accent text-primary px-3 py-2 rounded-lg font-semibold hover:bg-accent/80 flex items-center">
+    <!-- Mobile Icon -->
+    <span class="block md:hidden text-lg">←</span>
+    <!-- Desktop Text -->
+    <span class="hidden md:block">← Back to Home</span>
+  </a>
+</nav>
+
+  <!-- Login Form -->
+  <main class="pt-32 flex items-center justify-center px-4">
+    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+      <h2 class="text-2xl font-bold text-primary mb-6 text-center">Admin Login</h2>
+
+      <form id="loginForm" class="space-y-5">
+        <!-- Username -->
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+          <input type="text" id="username" name="username" required
+            class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none" />
+        </div>
+
+        <!-- Password -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" name="password" required
+            class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:outline-none" />
+        </div>
+
+        <!-- Error Message -->
+        <p id="errorMsg" class="text-red-500 text-sm hidden">Invalid username or password.</p>
+
+        <!-- Submit -->
+        <button type="submit"
+          class="w-full bg-primary text-accent font-semibold px-4 py-2 rounded-lg hover:bg-opacity-90 transition">
+          Login
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- JS -->
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const errorMsg = document.getElementById("errorMsg");
+
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      try {
+        const res = await fetch("http://localhost:4000/api/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          // ✅ Save token + username
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("username", data.username);
+
+          // ✅ Redirect to dashboard
+          window.location.href = "admin-dashboard.html";
+        } else {
+          errorMsg.textContent = data.message || "Invalid username or password.";
+          errorMsg.classList.remove("hidden");
+        }
+      } catch (err) {
+        errorMsg.textContent = "Server error, try again later.";
+        errorMsg.classList.remove("hidden");
+      }
+    });
+  </script>
+</body>
+</html>
